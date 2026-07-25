@@ -1,0 +1,52 @@
+{
+  "name": "pianoflow",
+  "version": "0.1.0",
+  "description": "A desktop app for learning and visualizing piano music with interactive playback, real-time input, and video export",
+  "author": "Ahmed Amer",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.11.1",
+    "@tauri-apps/plugin-dialog": "^2.7.2",
+    "@tauri-apps/plugin-fs": "^2.5.1",
+    "@tauri-apps/plugin-opener": "^2.5.4",
+    "@tauri-apps/plugin-os": "^2.3.2",
+    "@tauri-apps/plugin-window-state": "^2.4.1",
+    "@tonejs/midi": "^2.0.28",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.42.2",
+    "gif.js": "^0.2.0",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.26.0",
+    "pixi.js": "^8.19.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tone": "^15.1.22",
+    "vexflow": "^5.0.0",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/vite": "^4.3.3",
+    "@tauri-apps/cli": "^2.11.4",
+    "@types/gif.js": "^0.2.5",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "autoprefixer": "^10.5.4",
+    "oxlint": "^1.71.0",
+    "postcss": "^8.5.22",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1"
+  }
+}

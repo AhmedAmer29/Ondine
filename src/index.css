@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --color-surface: #05060a;
+  --color-surface-elevated: #0b0f1a;
+  --color-right-hand: #3b82f6;
+  --color-right-hand-bright: #00d4ff;
+  --color-left-hand: #ff5c8a;
+  --color-left-hand-bright: #f97316;
+  /** The app's one deliberate UI accent — primary actions, active/recording state, CTAs. Everything else (tabs, neutral toggles) stays on the white-opacity scale. */
+  --color-accent: #f97316;
+  --color-accent-soft: rgba(249, 115, 22, 0.16);
+}
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-surface);
+  color: #f4f5f7;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+input,
+textarea,
+[contenteditable='true'] {
+  -webkit-user-select: text;
+  user-select: text;
+  cursor: text;
+}
+
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.glass-panel {
+  background: rgba(18, 20, 28, var(--panel-alpha, 0.55));
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/** Same material as .glass-panel (background/blur), flattened for a persistent edge-to-edge bar instead of a floating card — no radius, no shadow, just a bottom border to separate it from the content below. */
+.glass-bar {
+  background: rgba(18, 20, 28, var(--panel-alpha, 0.55));
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.text-shadow-note {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+
+[data-tauri-drag-region] {
+  -webkit-app-region: drag;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 3px var(--color-accent-soft),
+    0 2px 6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+  cursor: pointer;
+}

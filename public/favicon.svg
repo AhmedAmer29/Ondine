@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <filter id="ondine-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="#0b0f1a" />
+  <rect x="6" y="6" width="244" height="244" rx="54" fill="none" stroke="#f97316" stroke-opacity="0.22" stroke-width="2" />
+  <g filter="url(#ondine-glow)">
+    <rect x="96" y="140" width="17" height="58" rx="8.5" fill="#f97316" />
+    <rect x="122" y="140" width="17" height="58" rx="8.5" fill="#f97316" />
+    <path d="M113 140 C 118 108, 132 100, 156 66" stroke="#f97316" stroke-width="17" stroke-linecap="round" fill="none" />
+    <circle cx="160" cy="60" r="17" fill="#f97316" />
+  </g>
+</svg>
