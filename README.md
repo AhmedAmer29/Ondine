@@ -1,8 +1,8 @@
-# PianoFlow
+# Ondine
 
 A modern desktop application for learning and visualizing piano music with real-time playback, live input support, and professional video export.
 
-![PianoFlow](https://img.shields.io/badge/platform-macOS%20|%20Windows-lightgrey)
+![Ondine](https://img.shields.io/badge/platform-macOS%20|%20Windows-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![TypeScript](https://img.shields.io/badge/language-TypeScript-3178c6)
 
@@ -50,7 +50,7 @@ A modern desktop application for learning and visualizing piano music with real-
 ## Installation
 
 ### Download
-Pre-built installers and apps are available on the [Releases](https://github.com/your-username/pianoflow/releases) page.
+Pre-built installers and apps are available on the [Releases](https://github.com/your-username/ondine/releases) page.
 
 **Windows:** Download `.exe` or `.msi` installer  
 **macOS:** Download `.dmg` or `.app` bundle
@@ -63,8 +63,8 @@ Pre-built installers and apps are available on the [Releases](https://github.com
 
 **Setup:**
 ```bash
-git clone https://github.com/your-username/pianoflow.git
-cd pianoflow
+git clone https://github.com/your-username/ondine.git
+cd ondine
 npm install
 npm run tauri dev
 ```
@@ -243,9 +243,9 @@ This project is licensed under the MIT License — see [LICENSE](LICENSE) for de
 
 ## Support
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/your-username/pianoflow/issues) on GitHub.
+Found a bug or have a feature request? Please [open an issue](https://github.com/your-username/ondine/issues) on GitHub.
 
-For questions and discussion, join our [Discord](https://discord.gg/your-invite-link) or check [Discussions](https://github.com/your-username/pianoflow/discussions).
+For questions and discussion, join our [Discord](https://discord.gg/your-invite-link) or check [Discussions](https://github.com/your-username/ondine/discussions).
 
 ---
 
