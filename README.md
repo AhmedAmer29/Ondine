@@ -250,3 +250,56 @@ For questions and discussion, join our [Discord](https://discord.gg/your-invite-
 ---
 
 **Happy practicing!** 🎹✨
+
+## macOS Build (from Windows)
+
+- **Note:** Building macOS bundles requires a macOS environment. From Windows you cannot natively produce a signed `.app`/`.dmg` for macOS, but you can use CI to build on macOS runners.
+
+- **Option 1 — GitHub Actions (recommended from Windows):** A workflow is included at [.github/workflows/build-macos.yml](.github/workflows/build-macos.yml). Trigger it via push to `main` or `Actions → Run workflow` to produce macOS bundles. Artifacts are uploaded from `src-tauri/target/release/bundle/macos`.
+
+- **Option 2 — Build locally on macOS:** If you have access to a Mac (Intel or Apple Silicon), run:
+
+```bash
+# install rust + node (if needed), then from repo root:
+npm ci
+npm run build
+npx tauri build
+
+# resulting bundles will be in:
+# src-tauri/target/release/bundle/macos
+```
+
+- **Quick script:** package.json includes `tauri:build` and `build:mac` scripts to simplify commands:
+
+```bash
+npm run build:mac
+```
+
+If you want, I can also add a GitHub Release automation to sign and publish macOS artifacts. Reply if you'd like that next.
+
+## Automated Releases (built on GitHub Actions)
+
+Releases are built automatically on GitHub Actions for each supported platform. The CI workflow runs on `ubuntu-latest`, `macos-latest`, and `windows-latest`; it builds the frontend, runs `npx tauri build` on each runner, and attaches the produced platform bundles to the GitHub Release.
+
+- Workflow file: [.github/workflows/release-cross-platform.yml](.github/workflows/release-cross-platform.yml)
+
+How to publish a release
+
+1. Create an annotated tag locally and push it:
+
+```powershell
+git tag -a v1.2.3 -m "Release v1.2.3"
+git push origin --tags
+```
+
+2. The `release-cross-platform` workflow triggers on pushed `v*` tags. Monitor progress in the Actions tab.
+
+3. When the workflow finishes it creates a GitHub Release and uploads the build bundles from `src-tauri/target/release/bundle/*`.
+
+Notes and caveats
+- The workflow currently runs `npm ci`, `npm run build`, then `npx tauri build` on each OS runner and uploads the bundle outputs. If you cannot run full packaging on a platform (tooling missing), the workflow will fail — platform runners generally include required build tools but macOS notarization and Windows code signing require credentials.
+- Code signing & notarization: macOS notarization and signed Windows installers require developer certificates and secret keys. I can add signing/notarization automation if you provide the required secrets (Apple developer key, Apple notarization credentials, or Windows signing certificate) or if you want to use a third-party signing service.
+
+If you'd like, I can now:
+- add optional signing + notarization steps for macOS and Windows (you'll need to supply secrets), or
+- add a separate workflow that produces unsigned bundles and creates a draft release for manual signing and publishing.
