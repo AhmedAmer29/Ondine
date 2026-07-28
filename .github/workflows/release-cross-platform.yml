@@ -1,5 +1,8 @@
 name: Release
 
+permissions:
+  contents: write
+
 on:
   push:
     tags:
@@ -11,6 +14,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
@@ -32,7 +36,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '24'
 
       - name: Install frontend dependencies
         run: npm ci
@@ -41,18 +45,45 @@ jobs:
         run: npm run build
 
       - name: Setup Rust toolchain and target
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
           targets: ${{ matrix.target }}
 
+      - name: Install Linux build dependencies
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            curl \
+            wget \
+            file \
+            pkg-config \
+            libssl-dev \
+            libglib2.0-dev \
+            libgtk-3-dev \
+            libwebkit2gtk-4.1-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            patchelf
+
       - name: Build Tauri bundle
-        run: npx tauri build
+        run: npx tauri build --target ${{ matrix.target }}
 
       - name: Upload bundles to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Only the final installer artifacts — not `bundle/**/*`, which also matches every file
+          # inside each bundler's staging directory (hundreds of loose .so/.xml/.gschema files for
+          # the AppImage, several same-named nested copies of icon.icns for the macOS .app/.dmg).
+          # Uploaded as flat release assets, those clashed on filename (422 "already_exists") and
+          # blew past GitHub's per-release asset volume, which is what the previous run's 404 on a
+          # random .so file partway through hundreds of uploads actually was.
           files: |
-            src-tauri/target/release/bundle/**
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            src-tauri/target/${{ matrix.target }}/release/bundle/appimage/*.AppImage
+            src-tauri/target/${{ matrix.target }}/release/bundle/deb/*.deb
+            src-tauri/target/${{ matrix.target }}/release/bundle/rpm/*.rpm
+            src-tauri/target/${{ matrix.target }}/release/bundle/dmg/*.dmg
+            src-tauri/target/${{ matrix.target }}/release/bundle/msi/*.msi
+            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*.exe
