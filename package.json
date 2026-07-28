@@ -1,6 +1,6 @@
 {
   "name": "ondine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A desktop app for learning and visualizing piano music with interactive playback, real-time input, and video export",
   "author": "Ahmed Amer",
   "license": "MIT",
@@ -10,7 +10,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "tauri:build": "npx tauri build",
+    "build:mac": "npm run build && npm run tauri:build"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.1",
